@@ -13,16 +13,13 @@ export function ensureAnchorHistory () {
 			return;
 		}
 
-		// Get the HREF value from the anchor tag
-		const href = $anchor.href;
-
 		// Only handle the anchor tag if the follow holds true:
-		// - The HREF is relative to the origin of the current location.
+		// - The origin is relative to the origin of the current location.
 		// - The target is targeting the current frame.
 		// - The anchor doesn't have the attribute [data-router-slot]="disabled"
-		if (!href.startsWith(location.origin) ||
-		   ($anchor.target !== "" && $anchor.target !== "_self") ||
-		   $anchor.dataset["routerSlot"] === "disabled") {
+		if ($anchor.origin !== location.origin ||
+			($anchor.target !== "" && $anchor.target !== "_self") ||
+			$anchor.dataset["routerSlot"] === "disabled") {
 			return;
 		}
 
