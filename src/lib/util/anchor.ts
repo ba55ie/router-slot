@@ -25,11 +25,12 @@ export function ensureAnchorHistory () {
 
 		// Remove the origin from the start of the HREF to get the path
 		const path = $anchor.pathname;
+		const search = $anchor.search;
 
 		// Prevent the default behavior
 		e.preventDefault();
 
 		// Change the history!
-		history.pushState(null, "", path);
+		history.pushState(null, "", path + search);
 	});
 }
