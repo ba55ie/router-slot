@@ -1,9 +1,9 @@
 import { ensureAnchorHistory } from "../lib/util/anchor";
 import { ensureHistoryEvents } from "../lib/util/history";
-import { path } from "../lib/util/url";
+import { pathWithQuery } from "../lib/util/url";
 import { addBaseTag, clearHistory } from "./test-helpers";
 
-const testPath = `/about`;
+const testPath = '/about?foo=bar&baz=1';
 
 describe("anchor", () => {
 	const {expect} = chai;
@@ -27,7 +27,7 @@ describe("anchor", () => {
 
 	it("[ensureAnchorHistory] should change anchors to use history API", done => {
 		window.addEventListener("pushstate", () => {
-			expect(path({end: false})).to.equal(testPath);
+			expect(pathWithQuery({end: false})).to.equal(testPath);
 			done();
 		});
 

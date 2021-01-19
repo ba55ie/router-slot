@@ -1,4 +1,4 @@
-import { basePath, path, query, toQuery, toQueryString } from "../lib/util/url";
+import { basePath, path, pathWithQuery, query, toQuery, toQueryString } from "../lib/util/url";
 import { addBaseTag, clearHistory } from "./test-helpers";
 
 describe("url", () => {
@@ -27,6 +27,17 @@ describe("url", () => {
 
 		history.pushState(null, "", "login/forgot-password");
 		expect(path()).to.equal(`/login/forgot-password/`);
+	});
+
+	it("[currentPath] should return the correct current path and search", () => {
+		history.pushState(null, "", "cool?");
+		expect(pathWithQuery()).to.equal(`/cool/`);
+
+		history.pushState(null, "", "cool?id=2");
+		expect(pathWithQuery()).to.equal(`/cool/?id=2`);
+
+		history.pushState(null, "", "login/forgot-password?user=test&forgot=true");
+		expect(pathWithQuery()).to.equal(`/login/forgot-password/?user=test&forgot=true`);
 	});
 
 	it("[basepath] should return correct base path", () => {

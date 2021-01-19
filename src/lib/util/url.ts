@@ -8,7 +8,22 @@ const $anchor = document.createElement("a");
  * @param options
  */
 export function path (options: Partial<ISlashOptions> = {}): string {
-	return slashify(window.location.pathname, options);
+	const path = slashify(window.location.pathname, options);
+	const search = window.location.search;
+
+	return search !== "" ? path + search : path;
+}
+
+/**
+ * The current path and search of the location.
+ * As default slashes are included at the start and end of the path.
+ * @param options
+ */
+export function pathWithQuery (options: Partial<ISlashOptions> = {}): string {
+	const path = slashify(window.location.pathname, options);
+	const search = window.location.search;
+
+	return search !== "" ? path + search : path;
 }
 
 /**
